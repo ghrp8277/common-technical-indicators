@@ -1,10 +1,11 @@
-package com.example.batchservice.entity.common;
+package com.example.common;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import com.example.common.Market;
 import java.util.Set;
+import com.example.common.StockData;
 
 @Entity
 @Data
@@ -23,8 +24,8 @@ public class Stock {
 
     @ManyToOne
     @JoinColumn(name = "market_id", nullable = false)
-    private com.example.batchservice.entity.common.Market market;
+    private Market market;
 
     @OneToMany(mappedBy = "stock")
-    private Set<com.example.batchservice.entity.common.StockData> stockData;
+    private Set<StockData> stockData;
 }

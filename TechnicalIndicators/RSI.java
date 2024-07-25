@@ -1,9 +1,9 @@
-package com.example.batchservice.entity.common;
+package com.example.common;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.BatchSize;
-
+import com.example.common.TechnicalIndicator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Embeddable
 @Data
-public class RSI implements com.example.batchservice.entity.common.TechnicalIndicator {
+public class RSI implements TechnicalIndicator {
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "rsi_values", joinColumns = @JoinColumn(name = "stock_data_id"))
     @Column(name = "value")

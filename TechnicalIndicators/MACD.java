@@ -1,9 +1,9 @@
-package com.example.batchservice.entity.common;
+package com.example.common;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.BatchSize;
-
+import com.example.common.TechnicalIndicator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Embeddable
 @Data
-public class MACD implements com.example.batchservice.entity.common.TechnicalIndicator {
+public class MACD implements TechnicalIndicator {
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "macd_line", joinColumns = @JoinColumn(name = "stock_data_id"))
     @Column(name = "value")

@@ -1,10 +1,12 @@
-package com.example.batchservice.entity.common;
+package com.example.common;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
-
+import com.example.common.Stock;
+import com.example.common.BollingerBands;
+import com.example.common.MACD;
 import java.util.List;
 
 @Entity
@@ -43,7 +45,7 @@ public class StockData {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stock_id", nullable = false)
-    private com.example.batchservice.entity.common.Stock stock;
+    private Stock stock;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "moving_average_12", joinColumns = @JoinColumn(name = "stock_data_id"))
@@ -64,10 +66,10 @@ public class StockData {
     private List<Double> movingAverage26;
 
     @Embedded
-    private com.example.batchservice.entity.common.BollingerBands bollingerBands;
+    private BollingerBands bollingerBands;
 
     @Embedded
-    private com.example.batchservice.entity.common.MACD macd;
+    private MACD macd;
 
     @Column(name = "rsi")
     private Double rsi;

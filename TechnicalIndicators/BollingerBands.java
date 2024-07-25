@@ -1,8 +1,9 @@
-package com.example.batchservice.entity.common;
+package com.example.common;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
+import com.example.common.TechnicalIndicator;
+import com.example.common.MovingAverage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 @Embeddable
 @Data
-public class BollingerBands implements com.example.batchservice.entity.common.TechnicalIndicator {
+public class BollingerBands implements TechnicalIndicator {
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "bollinger_bands_upper", joinColumns = @JoinColumn(name = "stock_data_id"))
     @Column(name = "value")
@@ -28,7 +29,7 @@ public class BollingerBands implements com.example.batchservice.entity.common.Te
 
     @Override
     public void calculate(List<Double> prices) {
-        com.example.batchservice.entity.common.MovingAverage ma = new com.example.batchservice.entity.common.MovingAverage();
+        MovingAverage ma = new MovingAverage();
         ma.calculate(prices);
         List<Double> sma20 = ma.getResults().get("SMA20");
         calculateBollingerBands(prices, sma20);

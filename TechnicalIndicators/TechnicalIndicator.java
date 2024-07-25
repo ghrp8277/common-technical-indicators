@@ -1,4 +1,4 @@
-package com.example.batchservice.entity.common;
+package com.example.common;
 
 import java.util.List;
 import java.util.Map;

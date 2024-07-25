@@ -1,8 +1,8 @@
-package com.example.batchservice.entity.common;
+package com.example.common;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
+import com.example.common.Stock;
 import java.util.Set;
 
 @Entity
@@ -18,5 +18,5 @@ public class Market {
     private String name;
 
     @OneToMany(mappedBy = "market")
-    private Set<com.example.batchservice.entity.common.Stock> stocks;
+    private Set<Stock> stocks;
 }
