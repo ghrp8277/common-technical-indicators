@@ -32,6 +32,13 @@ public class MACD implements TechnicalIndicator {
 
     @Override
     public void calculate(List<Double> prices) {
+        if (prices.size() < 26) {
+            macdLine = new ArrayList<>();
+            signalLine = new ArrayList<>();
+            histogram = new ArrayList<>();
+            return;
+        }
+
         List<Double> ema12 = calculateEMA(prices, 12);
         List<Double> ema26 = calculateEMA(prices, 26);
         calculateMACD(ema12, ema26);
@@ -52,7 +59,14 @@ public class MACD implements TechnicalIndicator {
     private List<Double> calculateEMA(List<Double> prices, int period) {
         List<Double> ema = new ArrayList<>(prices.size());
         double multiplier = 2.0 / (period + 1);
-        ema.add(prices.getFirst());
+
+        if (prices.size() < period) {
+            return ema;
+        }
+
+        double initialSMA = prices.subList(0, period).stream().mapToDouble(val -> val).average().orElse(0.0);
+        ema.add(initialSMA);
+
         for (int i = 1; i < prices.size(); i++) {
             double value = (prices.get(i) - ema.get(i - 1)) * multiplier + ema.get(i - 1);
             ema.add(value);
