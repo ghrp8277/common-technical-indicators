@@ -10,7 +10,7 @@ import com.example.common.StockData;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "stocks")
+@Table(name = "stocks", uniqueConstraints = {@UniqueConstraint(columnNames = "code")})
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
